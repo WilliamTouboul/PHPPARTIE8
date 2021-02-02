@@ -9,9 +9,9 @@
 
 <body>
     <!-- jj-mm-aa  -->
-    <?php
-    echo date('d-m-y');
-    ?>
+
+    <p> Nous sommes le : <?= date('d-m-y'); ?> </p>
+
 </body>
 
 </html>

@@ -13,7 +13,9 @@
     $date = date_create();
     echo date_timestamp_get($date).'<br>';
     $date2 = date_create("2016-08-02 15:00:00");
-    echo date_timestamp_get($date2);
+    echo date_timestamp_get($date2) .'<br>';
+    $timestamp2=new dateTime('02/08/2016 15:00:00');
+    echo $timestamp2 -> getTimestamp();
 
     ?>
 

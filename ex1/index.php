@@ -9,9 +9,9 @@
 
 <body>
     <!-- dd/mm/yyyy -->
-    <?php 
-    echo date('d/m/Y'); 
-    ?>
+    
+    <p> Nous somme le : <?= date('d/m/Y'); ?> </p>
+
 </body>
 
 </html>

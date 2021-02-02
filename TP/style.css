@@ -34,3 +34,10 @@ table {
     text-align: left;
     vertical-align: top;
 }
+
+.date-anniv {
+    font-size : 16px;
+    text-align : center;
+    vertical-align : center;
+    color : red;
+}
