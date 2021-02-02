@@ -2,21 +2,17 @@
 
 function GetCalendar($monthPicked, $yearPicked) // parametre Mois et Année a recup aprés.
 {
-    $days = array(6, 0, 1, 2, 3, 4, 5);
-    //lundi = 0, dimanche = 6
-    $mois = array('', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre');
-    $week = array('lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche');
+    $days = array(6, 0, 1, 2, 3, 4, 5); // Tab jour, lundi = 0, dimanche =6;
+    $mois = array('', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'); // Mois
+    $week = array('lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'); // Jours
 
-    $t = mktime(12, 0, 0, $monthPicked, 1, $yearPicked);
-    // Timestamp du premier jour du mois choisi et de l'année choisi
+    $t = mktime(12, 0, 0, $monthPicked, 1, $yearPicked); // Renvoi le timestamp du premier jour du mois choisi et de l'année choisi
 
-    echo '<table><tbody>';
-    // ouverture tableau
-    echo '<tr><td colspan="7" class="month">' . $mois[$monthPicked] . ' ' . $yearPicked . '</td></tr>';
-    // Case avec le mois et l'année ecrit
+    echo '<table><tbody>'; // ouverture tableau
+    echo '<tr><td colspan="7" class="month">' . $mois[$monthPicked] . ' ' . $yearPicked . '</td></tr>'; // Case avec le mois et l'année ecrit
     echo '<tr class="days">';
     for ($i = 0; $i < 7; $i++) {
-        echo '<td>' . $week[$i] . '</td>';
+        echo '<td>' . $week[$i] . '</td>';                   // Ligne de haut de tableau avec les jours lun->Dim
     }
     echo '</tr>';
     // Ligne avec les jours.
@@ -27,11 +23,11 @@ function GetCalendar($monthPicked, $yearPicked) // parametre Mois et Année a re
         echo '<tr>';
         for ($i = 0; $i < 7; $i++)        // Colonne (1/j)
         {
-            $week = $days[(int)date('w', $t)]; // jours de la semaine 0->6     
+            $week2 = $days[(int)date('w', $t)]; // jours de la semaine 0->6     
             $m2 = (int)date('n', $t);  // Mois 1->12
             $calDay = (int)date('j', $t); // Chiffre du jour
 
-            $easterInterval = easter_days($yearPicked); // Delai 21mars->Paque
+            $easterInterval = easter_days($yearPicked); // renvoi le Delai 21mars->Paque pour l'année choisi
             $date1 =  '21-03-' . $yearPicked; // 21 Mars de l'année choisi
             $date2 = date('d-m-Y', strtotime($date1 . '+' . $easterInterval . 'days')); // 21 Mars + délai
 
@@ -51,7 +47,7 @@ function GetCalendar($monthPicked, $yearPicked) // parametre Mois et Année a re
             $penteD = date('d', $pentecote);
             $penteM = date('m', $pentecote);
 
-            if (($week == $i) && ($m2 == $monthPicked)) {
+            if (($week2 == $i) && ($m2 == $monthPicked)) {
                 if (($calDay == 1) && ($m2 == 1)) { // Jours de l'an
                     echo '<td class="speDate">' .  $calDay . '<br> Bonne année' . '</td>';
                     $t += 86400;
@@ -92,7 +88,7 @@ function GetCalendar($monthPicked, $yearPicked) // parametre Mois et Année a re
                     echo '<td class="speDate">' .  $calDay . '<br> Ascenscion' . '</td>';
                     $t += 86400;
                 } else {
-                    echo '<td class="date">' .  $calDay . '</td>'; // Affiche le jour du mois
+                    echo '<td class="date">' .  $calDay . '</td>'; // Affiche le jour du mois 
                     $t += 86400; // Passe au jour suivant
                 }
             } else {
@@ -110,5 +106,5 @@ if (isset($_POST['buttonSubmit'])) {
     $monthToInt = intval($_POST['month'], 10);
     $yearToInt =  intval($_POST['year'], 10);
 
-    GetCalendar($monthToInt, $yearToInt);
+    GetCalendar($monthToInt, $yearToInt); // fonction
 }
